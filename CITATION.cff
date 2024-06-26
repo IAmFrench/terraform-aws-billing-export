@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: Amazon Web Services (AWS) Billing export Terraform Module
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - orcid: "https://orcid.org/0009-0002-1956-1126"
+    given-names: Alexandre
+    family-names: PARÈS
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.7876486
+repository-code: >-
+  https://github.com/IAmFrench/terraform-aws-billing-export
+repository-artifact: >-
+  https://registry.terraform.io/modules/IAmFrench/billing-export/aws/latest
+abstract: >-
+  Terraform Module witch creates billing export, including FOCUS, on AWS. 
+keywords:
+  - terraform
+  - terraform-modules
+  - aws
+  - aws-billing
+  - aws-cur
+  - aws-focus
+  - finops
+  - finops-focus
+license: Apache-2.0

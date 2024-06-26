@@ -10,7 +10,7 @@ authors:
     family-names: PARÈS
 identifiers:
   - type: doi
-    value: 10.5281/zenodo.7876486
+    value: 10.5281/zenodo.12556267
 repository-code: >-
   https://github.com/IAmFrench/terraform-aws-billing-export
 repository-artifact: >-

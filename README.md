@@ -22,7 +22,7 @@ module "aws_billing_export" {
   source  = "IAmFrench/billing-export/aws"
 
   # Version of this module, see release on GitHub: https://github.com/IAmFrench/terraform-aws-billing-export/releases
-  version = "1.0.0"
+  version = "1.0.3"
   
   # Name of the S3 bucket to create exports in
   s3_bucket_name   = "finops-exports-1a2b3c4d"
@@ -43,7 +43,7 @@ module "aws_billing_export" {
   source  = "IAmFrench/billing-export/aws"
 
   # Version of this module, see release on GitHub: https://github.com/IAmFrench/terraform-aws-billing-export/releases
-  version = "1.0.0"
+  version = "1.0.3"
   
   # Name of the S3 bucket to create exports in
   s3_bucket_name   = data.aws_s3_bucket.export.id
@@ -75,13 +75,13 @@ module "aws_billing_export" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.1.0 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | 5.47.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | >= 5.47.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.47.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 5.47.0 |
 
 ## Modules
 
@@ -91,12 +91,12 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_bcmdataexports_export.focus_1_0_preview](https://registry.terraform.io/providers/hashicorp/aws/5.47.0/docs/resources/bcmdataexports_export) | resource |
-| [aws_s3_bucket.export](https://registry.terraform.io/providers/hashicorp/aws/5.47.0/docs/resources/s3_bucket) | resource |
-| [aws_s3_bucket_policy.allow_data_export](https://registry.terraform.io/providers/hashicorp/aws/5.47.0/docs/resources/s3_bucket_policy) | resource |
-| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/5.47.0/docs/data-sources/caller_identity) | data source |
-| [aws_iam_policy_document.allow_data_export](https://registry.terraform.io/providers/hashicorp/aws/5.47.0/docs/data-sources/iam_policy_document) | data source |
-| [aws_s3_bucket.export](https://registry.terraform.io/providers/hashicorp/aws/5.47.0/docs/data-sources/s3_bucket) | data source |
+| [aws_bcmdataexports_export.focus_1_0_preview](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/bcmdataexports_export) | resource |
+| [aws_s3_bucket.export](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_policy.allow_data_export](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [aws_iam_policy_document.allow_data_export](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_s3_bucket.export](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/s3_bucket) | data source |
 
 ## Inputs
 

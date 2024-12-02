@@ -70,7 +70,7 @@ module "aws_billing_export" {
 
 - `ValidationException: S3 bucket permission validation failed`: The existing S3 bucket is missing the policy to allow AWS export services to write to the bucket, see https://docs.aws.amazon.com/cur/latest/userguide/dataexports-s3-bucket.html
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -117,4 +117,4 @@ No modules.
 |------|-------------|
 | <a name="output_export_arn"></a> [export\_arn](#output\_export\_arn) | ARN of the export |
 | <a name="output_s3_arn"></a> [s3\_arn](#output\_s3\_arn) | ARN of the export bucket |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->

@@ -1,6 +1,6 @@
 output "export_arn" {
   description = "ARN of the export"
-  value       = aws_bcmdataexports_export.focus_1_0_preview[0]
+  value       = aws_bcmdataexports_export.focus[0]
 }
 
 output "s3_arn" {

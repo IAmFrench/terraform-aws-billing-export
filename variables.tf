@@ -56,9 +56,9 @@ variable "export_version" {
   description = <<-EOT
   Version of the billing export. Should be use with `export_type`.
   Valid values are:
-  - `1.0-preview` for FOCUS
+  - `1.0` and `1.0-preview` for FOCUS
   - `legacy` or `2.0` for CUR
-  E.g.: `1.0-preview`, `legacy`, `2.0`
+  E.g.: `1.0`, `1.0-preview`, `legacy`, `2.0`
   EOT
 
   type     = string
@@ -67,6 +67,7 @@ variable "export_version" {
   validation {
     condition = contains([
       # FOCUS export type
+      "1.0",
       "1.0-preview",
 
       # CUR export type
@@ -76,7 +77,7 @@ variable "export_version" {
       ],
       var.export_version
     )
-    error_message = "Unsupported version. Please the check your `export_type` and the associated version. (E.g.: `1.0-preview` for FOCUS, `legacy` or `2.0` for CUR)"
+    error_message = "Unsupported version. Please the check your `export_type` and the associated version. (E.g.: `1.0`, `1.0-preview` for FOCUS, `legacy` or `2.0` for CUR)"
   }
 }
 

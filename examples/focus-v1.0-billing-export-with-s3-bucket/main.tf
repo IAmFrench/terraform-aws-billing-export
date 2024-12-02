@@ -2,18 +2,14 @@ provider "aws" {
   region = local.region
 }
 
-data "aws_s3_bucket" "export" {
-  bucket = "finops-exports-1a2b3c4d"
-}
-
 locals {
   region = "eu-west-1"
 
-  s3_bucket_name   = data.aws_s3_bucket.export.id
+  s3_bucket_name   = "finops-exports-1a2b3c4d"
   export_type      = "FOCUS"
-  export_version   = "1.0-preview"
-  export_name      = "focus-1-0-preview-export"
-  export_s3_prefix = "focus/v1.0-preview/1234556789"
+  export_version   = "1.0"
+  export_name      = "focus-1-0-export"
+  export_s3_prefix = "focus/v1.0/1234556789"
 }
 
 module "aws_billing_export" {
@@ -21,8 +17,6 @@ module "aws_billing_export" {
 
   # Name of the S3 bucket to create exports in
   s3_bucket_name = local.s3_bucket_name
-  # Should this module create the S3 bucket with associated policy?
-  create_s3_bucket = false
   # Type of the export
   export_type = local.export_type
   # Version of the export

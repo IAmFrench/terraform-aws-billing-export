@@ -31,9 +31,9 @@ module "aws_billing_export" {
   # Version of the export
   export_version   = "1.0"
   # Name of the export
-  export_name      = "focus-export"
+  export_name      = "focus-v1-0-export"
   # Prefix of the export
-  export_s3_prefix = "focus/1234556789"
+  export_s3_prefix = "focus/v1.0/1234556789"
 }
 ```
 
@@ -54,9 +54,9 @@ module "aws_billing_export" {
   # Version of the export
   export_version   = "1.0"
   # Name of the export
-  export_name      = "focus-export"
+  export_name      = "focus-v1-0-export"
   # Prefix of the export
-  export_s3_prefix = "focus/1234556789"
+  export_s3_prefix = "focus/v1.0/1234556789"
 }
 ```
 ## Roadmap

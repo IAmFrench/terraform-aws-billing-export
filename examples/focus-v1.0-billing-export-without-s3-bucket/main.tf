@@ -1,19 +1,15 @@
-provider "aws" {
-  region = local.region
-}
-
 data "aws_s3_bucket" "export" {
-  bucket = "finops-exports-1a2b3c4d"
+  bucket = "finops-exports-yxruxc5c"
 }
 
 locals {
-  region = "eu-west-1"
+  region = "eu-west-3" # Europe (Paris)
 
   s3_bucket_name   = data.aws_s3_bucket.export.id
   export_type      = "FOCUS"
   export_version   = "1.0"
-  export_name      = "focus-1-0-export"
-  export_s3_prefix = "focus/v1.0/1234556789"
+  export_name      = "focus-1-0-export-bis"
+  export_s3_prefix = "focus/v1.0-bis/1234556789"
 }
 
 module "aws_billing_export" {

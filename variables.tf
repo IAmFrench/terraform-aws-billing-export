@@ -29,8 +29,8 @@ variable "create_s3_bucket" {
 variable "export_type" {
   description = <<-EOT
   Version of the billing export.
-  Valid values: `FOCUS` or `CUR`
-  E.g.: `FOCUS` or `CUR` 
+  Valid values: `FOCUS`
+  E.g.: `FOCUS`
   EOT
 
   type     = string
@@ -39,15 +39,11 @@ variable "export_type" {
   validation {
     condition = contains([
       # FOCUS Export: 
-      "FOCUS",
-
-      # CUR Export:
-      # Disabled as this module doesn't yet implement it
-      # "CUR"
+      "FOCUS"
       ],
       var.export_type
     )
-    error_message = "Unsupported export type. Only `FOCUS` and `CUR` export types are supported."
+    error_message = "Unsupported export type. Only `FOCUS` export types are supported."
   }
 }
 
@@ -56,9 +52,8 @@ variable "export_version" {
   description = <<-EOT
   Version of the billing export. Should be use with `export_type`.
   Valid values are:
-  - `1.0` and `1.0-preview` for FOCUS
-  - `legacy` or `2.0` for CUR
-  E.g.: `1.0`, `1.0-preview`, `legacy`, `2.0`
+  - `1.2`, `1.0` and `1.0-preview` for FOCUS
+  E.g.: `1.2`, `1.0`, `1.0-preview`
   EOT
 
   type     = string
@@ -67,6 +62,7 @@ variable "export_version" {
   validation {
     condition = contains([
       # FOCUS export type
+      "1.2",
       "1.0",
       "1.0-preview",
 
@@ -77,7 +73,7 @@ variable "export_version" {
       ],
       var.export_version
     )
-    error_message = "Unsupported version. Please the check your `export_type` and the associated version. (E.g.: `1.0`, `1.0-preview` for FOCUS, `legacy` or `2.0` for CUR)"
+    error_message = "Unsupported version. Please the check your `export_type` and the associated version. (E.g.: `1.0`, `1.0-preview` for FOCUS)"
   }
 }
 
@@ -86,7 +82,7 @@ variable "export_name" {
   description = <<-EOT
   Name of the billing export. 
   Validation: Export name must be unique, not include spaces, and contain only alphanumeric and characters ! - _ . * ' ( )
-  E.g.: `focus-v1-0-preview`
+  E.g.: `focus-v1-2`
   EOT
 
   type     = string
@@ -97,7 +93,7 @@ variable "export_name" {
 variable "export_s3_prefix" {
   description = <<-EOT
   Prefix of the billing export.
-  E.g.: `focus/123456789` with `123456789` being the account id
+  E.g.: `focus/v1.2/123456789` with `123456789` being the account id
   EOT
 
   type     = string
@@ -109,6 +105,7 @@ variable "export_s3_prefix" {
 variable "tags" {
   description = <<-EOT
   Tags to apply to all created resources.
+  
   E.g.:
   ```
   {
@@ -119,5 +116,20 @@ variable "tags" {
 
   type     = map(string)
   default  = {}
+  nullable = false
+}
+
+variable "s3_force_destroy" {
+  description = <<-EOT
+  Force the destruction of the S3 bucket containing the billing export when the 
+  module is destroyed even if it contains objects.
+
+  E.g.: `true`, `false`
+
+  Default is `false`.
+  EOT
+
+  type     = bool
+  default  = false
   nullable = false
 }

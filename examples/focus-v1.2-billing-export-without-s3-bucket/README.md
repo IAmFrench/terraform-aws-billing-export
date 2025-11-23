@@ -1,4 +1,4 @@
-# FOCUS v1.0-preview billing export without S3 bucket
+# FOCUS v1.2 billing export without S3 bucket
 
 This example will create a AWS FOCUS billing export to an existing S3 bucket.
 

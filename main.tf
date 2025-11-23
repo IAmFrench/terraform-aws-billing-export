@@ -8,6 +8,8 @@ resource "aws_s3_bucket" "export" {
   count  = var.create_s3_bucket ? 1 : 0
   bucket = var.s3_bucket_name
 
+  force_destroy = var.s3_force_destroy
+
   tags = var.tags
 }
 
@@ -82,16 +84,28 @@ locals {
     region = var.create_s3_bucket ? aws_s3_bucket.export[0].region : data.aws_s3_bucket.export[0].region
   }
   export_version = {
+    # FOCUS 1.2
+    # Announcement: https://aws.amazon.com/blogs/aws-cloud-financial-management/data-exports-for-focus-1-2-is-now-generally-available/
+    # Documentation: https://docs.aws.amazon.com/cur/latest/userguide/table-dictionary-focus-1-2-aws.html
+    "1.2" = {
+      query_statement      = "SELECT AvailabilityZone, BilledCost, BillingAccountId, BillingAccountName, BillingAccountType, BillingCurrency, BillingPeriodEnd, BillingPeriodStart, CapacityReservationId, CapacityReservationStatus, ChargeCategory, ChargeClass, ChargeDescription, ChargeFrequency, ChargePeriodEnd, ChargePeriodStart, CommitmentDiscountCategory, CommitmentDiscountId, CommitmentDiscountName, CommitmentDiscountQuantity, CommitmentDiscountStatus, CommitmentDiscountType, CommitmentDiscountUnit, ConsumedQuantity, ConsumedUnit, ContractedCost, ContractedUnitPrice, EffectiveCost, InvoiceId, InvoiceIssuerName, ListCost, ListUnitPrice, PricingCategory, PricingCurrency, PricingCurrencyContractedUnitPrice, PricingCurrencyEffectiveCost, PricingCurrencyListUnitPrice, PricingQuantity, PricingUnit, ProviderName, PublisherName, RegionId, RegionName, ResourceId, ResourceName, ResourceType, ServiceCategory, ServiceName, ServiceSubcategory, SkuId, SkuMeter, SkuPriceDetails, SkuPriceId, SubAccountId, SubAccountName, SubAccountType, Tags, x_Discounts, x_Operation, x_ServiceCode FROM FOCUS_1_2_AWS"
+      table_configurations = { FOCUS_1_2_AWS : { TIME_GRANULARITY : "HOURLY" } }
+    }
+
     # FOCUS 1.0 GA 
-    # learn more: https://docs.aws.amazon.com/cur/latest/userguide/table-dictionary-focus-1-0-aws.html
+    # Announcement: https://aws.amazon.com/blogs/aws-cloud-financial-management/data-exports-for-focus-1-0-is-now-generally-available/
+    # Documentation: https://docs.aws.amazon.com/cur/latest/userguide/table-dictionary-focus-1-0-aws.html
     "1.0" = {
-      "query" = "SELECT AvailabilityZone, BilledCost, BillingAccountId, BillingAccountName, BillingCurrency, BillingPeriodEnd, BillingPeriodStart, ChargeCategory, ChargeClass, ChargeDescription, ChargeFrequency, ChargePeriodEnd, ChargePeriodStart, CommitmentDiscountCategory, CommitmentDiscountId, CommitmentDiscountName, CommitmentDiscountStatus, CommitmentDiscountType, ConsumedQuantity, ConsumedUnit, ContractedCost, ContractedUnitPrice, EffectiveCost, InvoiceIssuerName, ListCost, ListUnitPrice, PricingCategory, PricingQuantity, PricingUnit, ProviderName, PublisherName, RegionId, RegionName, ResourceId, ResourceName, ResourceType, ServiceCategory, ServiceName, SkuId, SkuPriceId, SubAccountId, SubAccountName, Tags, x_CostCategories, x_Discounts, x_Operation, x_ServiceCode, x_UsageType FROM FOCUS_1_0_AWS"
+      query_statement      = "SELECT AvailabilityZone, BilledCost, BillingAccountId, BillingAccountName, BillingCurrency, BillingPeriodEnd, BillingPeriodStart, ChargeCategory, ChargeClass, ChargeDescription, ChargeFrequency, ChargePeriodEnd, ChargePeriodStart, CommitmentDiscountCategory, CommitmentDiscountId, CommitmentDiscountName, CommitmentDiscountStatus, CommitmentDiscountType, ConsumedQuantity, ConsumedUnit, ContractedCost, ContractedUnitPrice, EffectiveCost, InvoiceIssuerName, ListCost, ListUnitPrice, PricingCategory, PricingQuantity, PricingUnit, ProviderName, PublisherName, RegionId, RegionName, ResourceId, ResourceName, ResourceType, ServiceCategory, ServiceName, SkuId, SkuPriceId, SubAccountId, SubAccountName, Tags, x_CostCategories, x_Discounts, x_Operation, x_ServiceCode, x_UsageType FROM FOCUS_1_0_AWS"
+      table_configurations = { FOCUS_1_0_AWS : {} }
     }
 
     # FOCUS 1.0 (Preview)
-    # Learn more: https://docs.aws.amazon.com/cur/latest/userguide/table-dictionary-focus-1-0-aws-preview.html
+    # Announcement: https://aws.amazon.com/blogs/aws-cloud-financial-management/announcing-data-exports-for-focus-1-0-preview-in-aws-billing-and-cost-management/
+    # Documentation: https://docs.aws.amazon.com/cur/latest/userguide/table-dictionary-focus-1-0-aws-preview.html
     "1.0-preview" = {
-      "query" = "SELECT AvailabilityZone, BilledCost, BillingAccountId, BillingAccountName, BillingCurrency, BillingPeriodEnd, BillingPeriodStart, ChargeCategory, ChargeClass, ChargeDescription, ChargeFrequency, ChargePeriodEnd, ChargePeriodStart, CommitmentDiscountCategory, CommitmentDiscountId, CommitmentDiscountName, CommitmentDiscountType, CommitmentDiscountStatus, ConsumedQuantity, ConsumedUnit, ContractedCost, ContractedUnitPrice, EffectiveCost, InvoiceIssuerName, ListCost, ListUnitPrice, PricingCategory, PricingQuantity, PricingUnit, ProviderName, PublisherName, RegionId, RegionName, ResourceId, ResourceName, ResourceType, ServiceCategory, ServiceName, SkuId, SkuPriceId, SubAccountId, SubAccountName, Tags, x_CostCategories, x_Discounts, x_Operation, x_ServiceCode, x_UsageType FROM FOCUS_1_0_AWS_PREVIEW"
+      query_statement      = "SELECT AvailabilityZone, BilledCost, BillingAccountId, BillingAccountName, BillingCurrency, BillingPeriodEnd, BillingPeriodStart, ChargeCategory, ChargeClass, ChargeDescription, ChargeFrequency, ChargePeriodEnd, ChargePeriodStart, CommitmentDiscountCategory, CommitmentDiscountId, CommitmentDiscountName, CommitmentDiscountType, CommitmentDiscountStatus, ConsumedQuantity, ConsumedUnit, ContractedCost, ContractedUnitPrice, EffectiveCost, InvoiceIssuerName, ListCost, ListUnitPrice, PricingCategory, PricingQuantity, PricingUnit, ProviderName, PublisherName, RegionId, RegionName, ResourceId, ResourceName, ResourceType, ServiceCategory, ServiceName, SkuId, SkuPriceId, SubAccountId, SubAccountName, Tags, x_CostCategories, x_Discounts, x_Operation, x_ServiceCode, x_UsageType FROM FOCUS_1_0_AWS_PREVIEW"
+      table_configurations = { FOCUS_1_0_AWS_PREVIEW : {} }
     }
   }
 }
@@ -105,7 +119,8 @@ resource "aws_bcmdataexports_export" "focus" {
   export {
     name = var.export_name
     data_query {
-      query_statement = local.export_version[var.export_version].query
+      query_statement      = local.export_version[var.export_version].query_statement
+      table_configurations = local.export_version[var.export_version].table_configurations
     }
     description = "FOCUS export"
     destination_configurations {
@@ -128,4 +143,11 @@ resource "aws_bcmdataexports_export" "focus" {
   }
 
   tags = var.tags
+
+  lifecycle {
+    ignore_changes = [
+      export[0].data_query[0].table_configurations,
+      tags
+    ]
+  }
 }

@@ -1,7 +1,7 @@
 locals {
   region = "eu-west-3" # Europe (Paris)
 
-  s3_bucket_name = "finops-exports-fdxfttyp"
+  s3_bucket_name = "finops-exports-1a2b3c4d"
   export_type    = "FOCUS"
 
   exports = [
@@ -28,7 +28,6 @@ module "aws_billing_export" {
   export_name = "finops-focus-${replace(each.value, ".", "-")}-export"
   # Prefix of the export
   export_s3_prefix = "focus/v${each.value}/1234556789"
-
   # Force destroy the S3 bucket when the module is destroyed event if it contains objects
   s3_force_destroy = true
 }

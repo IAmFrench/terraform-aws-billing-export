@@ -27,4 +27,6 @@ module "aws_billing_export" {
   export_name = local.export_name
   # Prefix of the export
   export_s3_prefix = local.export_s3_prefix
+  # Force destroy the S3 bucket when the module is destroyed event if it contains objects
+  s3_force_destroy = true
 }

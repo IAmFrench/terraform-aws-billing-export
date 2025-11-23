@@ -1,5 +1,5 @@
 data "aws_s3_bucket" "export" {
-  bucket = "finops-exports-fdxfttyp"
+  bucket = "finops-exports-1a2b3c4d"
 }
 
 locals {

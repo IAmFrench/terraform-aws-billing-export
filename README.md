@@ -24,7 +24,7 @@ module "aws_billing_export" {
   source  = "IAmFrench/billing-export/aws"
 
   # Version of this module, see release on GitHub: https://github.com/IAmFrench/terraform-aws-billing-export/releases
-  version = "1.0.5"
+  version = "1.0.6"
   
   # Name of the S3 bucket to create exports in
   s3_bucket_name   = "finops-exports-1a2b3c4d"
@@ -45,7 +45,7 @@ module "aws_billing_export" {
   source  = "IAmFrench/billing-export/aws"
 
   # Version of this module, see release on GitHub: https://github.com/IAmFrench/terraform-aws-billing-export/releases
-  version = "1.0.5"
+  version = "1.0.6"
   
   # Name of the S3 bucket to create exports in
   s3_bucket_name   = data.aws_s3_bucket.export.id
